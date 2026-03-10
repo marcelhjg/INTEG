@@ -26,7 +26,7 @@ img_dir = os.path.join(current_dir, "integ images")
 # ==========================================
 recipes = {
     "Ilocos Empanada": {
-        "img": "images/1.png", "rating": "4.8", "emoji": "🥟",
+        "img": "\\wsl.localhost\Ubuntu\home\kim\INTEG_folder\images\1.png", "rating": "4.8", "emoji": "🥟",
         "link": "https://www.panlasangpinoy.com",
         "ing": ["Rice flour", "Longganisa", "Egg", "Papaya"],
         "inst": "Flatten dough, add fillings, and deep fry until crispy."
