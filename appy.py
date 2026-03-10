@@ -32,43 +32,43 @@ st.markdown("""
 # Paalala: Siguraduhin na ang folder name ay "integ images" sa VS Code mo.
 recipes = {
     "Ilocos Empanada": {
-        "emoji": "🥟", "img": "integ images/1.png", "rating": "4.8",
+        "emoji": "🥟", "img": "images/1.png", "rating": "4.8",
         "link": "https://example.com/ilocos-empanada-recipe", # PALITAN MO ITO NG TUNAY NA LINK
         "ing": ["2 cups rice flour", "1/2 cup water", "Grated green papaya", "Longganisa", "1 egg"],
         "inst": ["Mix flour & water.", "Flatten on plastic.", "Add filling.", "Deep fry."]
     },
     "Dubai Chewy Cookie": {
-        "emoji": "🍪", "img": "integ images/2.png", "rating": "4.9",
+        "emoji": "🍪", "img": "images/2.png", "rating": "4.9",
         "link": "https://example.com/dubai-cookie-recipe",
         "ing": ["1 cup butter", "1 cup sugar", "2 cups flour", "Pistachio cream", "Kunafa pastry"],
         "inst": ["Cream butter.", "Fold in flour.", "Stuff with pistachio.", "Bake 180°C."]
     },
     "Tofu Squares": {
-        "emoji": "🍲", "img": "integ images/3.png", "rating": "4.2",
+        "emoji": "🍲", "img": "images/3.png", "rating": "4.2",
         "link": "https://example.com/tofu-squares-recipe",
         "ing": ["Firm tofu", "Cornstarch", "Soy sauce", "Honey"],
         "inst": ["Cube tofu.", "Coat in starch.", "Air fry.", "Toss in sauce."]
     },
     "Samyang Omelette": {
-        "emoji": "🍳", "img": "integ images/4.png", "rating": "4.7",
+        "emoji": "🍳", "img": "images/4.png", "rating": "4.7",
         "link": "https://example.com/samyang-omelette-recipe",
         "ing": ["Samyang noodles", "2 Eggs", "Cheese slice"],
         "inst": ["Boil noodles.", "Mix with sauce.", "Fold into omelette."]
     },
     "Cheesy Corn": {
-        "emoji": "🌽", "img": "integ images/5.png", "rating": "4.6",
+        "emoji": "🌽", "img": "images/5.png", "rating": "4.6",
         "link": "https://example.com/cheesy-corn-recipe",
         "ing": ["Sweet corn", "Mayonnaise", "Mozzarella", "Butter"],
         "inst": ["Sauté corn.", "Mix mayo/cheese.", "Melt until gooey."]
     },
     "Spud": {
-        "emoji": "🥔", "img": "integ images/6.png", "rating": "4.4",
+        "emoji": "🥔", "img": "images/6.png", "rating": "4.4",
         "link": "https://example.com/spud-recipe",
         "ing": ["Large potato", "Butter", "Cheese", "Bacon"],
         "inst": ["Bake potato.", "Mash inside.", "Add toppings."]
     },
     "Tiramisu": {
-        "emoji": "🍰", "img": "integ images/7.png", "rating": "5.0",
+        "emoji": "🍰", "img": "images/7.png", "rating": "5.0",
         "link": "https://example.com/tiramisu-recipe",
         "ing": ["Ladyfingers", "Espresso", "Mascarpone"],
         "inst": ["Dip biscuits.", "Layer with cheese.", "Chill 4 hours."]
