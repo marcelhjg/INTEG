@@ -102,33 +102,43 @@ with st.sidebar:
             st.session_state.selected_food = fav
             st.rerun()
 
-# Logic
+# About Page
 if page == "About":
-    st.title("ℹ️ Project Information")
-    st.info("Created for Streamlit UI Assignment")
-    st.write("- **What it does:** Digital recipe book for TikTok trends.")
-    st.write("- **Target User:** Aspiring home cooks and food enthusiasts.")
-    st.write("- **Inputs:** Ratings, notes, sliders, and photo uploads.")
-    st.write("- **Outputs:** Recipe cards, interactive timers, and animations.")
+    st.title("ℹ️ About Snackverse 2026")
+    st.subheader("🌟 What is Snackverse?")
+    st.write("Have you ever seen a delicious snack on your social media feed and wondered how to make it? **Snackverse** is your digital kitchen companion! This app is a collection of the most famous and viral food trends from TikTok and the internet.")
+    
+    st.divider()
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("### 🎯 Who is this for?")
+        st.write("This app is for everyone! From students wanting a quick snack to home cooks looking for a fun challenge. You don't need to be a chef to enjoy these recipes.")
+    with col2:
+        st.markdown("### 🛠️ How it Works")
+        st.write("1. Browse through the gallery. \n2. Check the ingredients. \n3. Use the timer while cooking. \n4. Rate your dish!")
+    
+    st.divider()
+    st.info("Our goal is to make cooking fun, easy, and interactive. Enjoy your food adventure!")
+
+# 7. Home Page
 else:
     if st.session_state.selected_food is None:
         st.title("🍔 Snackverse 2026")
-        
         cols = st.columns(3)
         for i, (name, data) in enumerate(recipes.items()):
             with cols[i % 3]:
-                try:
-                    st.image(data["img"], use_container_width=True)
-                except:
-                    st.warning("Image missing")
+                try: st.image(data["img"], use_container_width=True)
+                except: st.warning("Image missing")
                 if st.button(f"{data['emoji']} {name}", key=name, use_container_width=True):
                     st.session_state.selected_food = name
                     st.rerun()
                 st.write(f"Rating: {'⭐' * data['rating']}")
     else:
+        # Detail View
         food = st.session_state.selected_food
         data = recipes[food]
-        if st.button("⬅️ Back to Gallery"): 
+        if st.button("Back to Gallery"): 
             st.session_state.selected_food = None
             st.rerun()
         
@@ -139,18 +149,19 @@ else:
             st.metric("Difficulty", data["diff"])
         with c2:
             st.header(f"{food} {data['emoji']}")
-            st.write(f"**Rating:** {'⭐' * data['rating']}")
             st.subheader("🛒 What You Need")
-            st.write(f"To make this delicious {food}, you'll need {', '.join(data['ing'])}.")
+            st.write(f"To make this, you'll need: {', '.join(data['ing'])}.")
             st.subheader("👨‍🍳 How to Prepare")
             st.write(" ".join(data["inst"]))
             st.divider()
+            
             if st.button("⏱️ Start Cooking Timer"):
                 with st.empty():
                     for s in range(5, 0, -1): 
                         st.write(f"Cooking... {s}s")
                         time.sleep(1)
                     st.success("Your dish is ready!")
+            
             st.slider("Review this recipe", 1, 5, 3)
             st.text_area("Your thoughts:")
             st.file_uploader("Upload your dish", type=["jpg"])
