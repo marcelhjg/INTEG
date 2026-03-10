@@ -26,43 +26,43 @@ img_dir = os.path.join(current_dir, "integ images")
 # ==========================================
 recipes = {
     "Ilocos Empanada": {
-        "img": "1.png", "rating": "4.8", "emoji": "🥟",
+        "img": "images/1.png", "rating": "4.8", "emoji": "🥟",
         "link": "https://www.panlasangpinoy.com",
         "ing": ["Rice flour", "Longganisa", "Egg", "Papaya"],
         "inst": "Flatten dough, add fillings, and deep fry until crispy."
     },
     "Dubai Chewy Cookie": {
-        "img": "2.png", "rating": "4.9", "emoji": "🍪",
+        "img": "images/2.png", "rating": "4.9", "emoji": "🍪",
         "link": "https://www.tiktok.com",
         "ing": ["Butter", "Flour", "Pistachio cream", "Kunafa"],
         "inst": "Mix ingredients, stuff with kunafa, and bake at 180°C."
     },
     "Tofu Squares": {
-        "img": "3.png", "rating": "4.2", "emoji": "🍲",
+        "img": "images/3.png", "rating": "4.2", "emoji": "🍲",
         "link": "https://www.yummy.ph",
         "ing": ["Firm Tofu", "Cornstarch", "Soy Sauce", "Honey"],
         "inst": ["Cube tofu.", "Coat in starch.", "Air fry until golden."]
     },
     "Samyang Omelette": {
-        "img": "4.png", "rating": "4.7", "emoji": "🍳",
+        "img": "images/4.png", "rating": "4.7", "emoji": "🍳",
         "link": "https://www.google.com",
         "ing": ["Samyang Noodles", "Eggs", "Cheese"],
         "inst": "Boil noodles, mix sauce, and fold into an omelette."
     },
     "Cheesy Corn": {
-        "img": "5.png", "rating": "4.6", "emoji": "🌽",
+        "img": "images/5.png", "rating": "4.6", "emoji": "🌽",
         "link": "https://www.allrecipes.com",
         "ing": ["Sweet Corn", "Mozzarella", "Mayo", "Butter"],
         "inst": "Sauté corn in butter, add mayo and cheese, then melt."
     },
     "Spud": {
-        "img": "6.png", "rating": "4.4", "emoji": "🥔",
+        "img": "images/6.png", "rating": "4.4", "emoji": "🥔",
         "link": "https://www.foodnetwork.com",
         "ing": ["Potato", "Cheese", "Bacon", "Sour Cream"],
         "inst": "Bake potato, mash the inside, and add toppings."
     },
     "Tiramisu": {
-        "img": "7.png", "rating": "5.0", "emoji": "🍰",
+        "img": "images/7.png", "rating": "5.0", "emoji": "🍰",
         "link": "https://www.delish.com",
         "ing": ["Ladyfingers", "Espresso", "Mascarpone"],
         "inst": "Layer coffee-dipped biscuits with mascarpone cream."
