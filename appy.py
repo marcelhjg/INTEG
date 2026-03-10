@@ -6,7 +6,7 @@ import time
 # ==========================================
 recipes = {
     "Ilocos Empanada": {
-        "emoji": "🥟", "img": "ilocos_empanada.jpg", "rating": "4.8",
+        "emoji": "🥟", "img": "1.png", "rating": "4.8",
         "ing": ["2 cups rice flour", "1/2 cup water", "Grated green papaya", "Longganisa", "1 egg"],
         "inst": ["Mix flour & water.", "Flatten on plastic.", "Add filling.", "Deep fry."]
     },
