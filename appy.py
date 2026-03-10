@@ -4,13 +4,31 @@ import time
 # Page Config
 st.set_page_config(page_title="Snackverse", layout="wide", page_icon="🍔")
 
-# Purple Theme
 st.markdown("""
 <style>
-.stApp { background-color: #E6E6FA; }
-h1, h2, h3 { color: #CF9FFF; }
-.stButton>button { background-color: #9b59ff; color: white; border-radius: 10px; }
-.stButton>button:hover { background-color: #7a3cff; color: white; }
+/* Background ng buong app */
+.stApp { 
+    background-color: #E6E6FA; 
+}
+
+/* Kulay ng mga headers */
+h1, h2, h3 { 
+    color: #9370DB; 
+}
+
+/* Styling ng mga buttons */
+.stButton>button { 
+    background-color:
+    color: #4B0082;       
+    border-radius: 10px; 
+    border: 1px solid #9370DB;
+}
+
+/* Hover effect para sa buttons */
+.stButton>button:hover { 
+    background-color: #9370DB; 
+    color: white; 
+}
 </style>
 """, unsafe_allow_html=True)
 
