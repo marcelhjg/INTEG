@@ -1,5 +1,4 @@
 import streamlit as st
-import os
 
 # 1. PAGE CONFIG
 st.set_page_config(page_title="TikTok Recipe Vault", layout="wide")
@@ -8,95 +7,56 @@ st.set_page_config(page_title="TikTok Recipe Vault", layout="wide")
 st.markdown("""
     <style>
     .stApp { background-color: #F3E5F5; }
+    .stButton>button { background-color: #CE93D8; color: white; border-radius: 10px; border: none; }
+    .stSidebar { background-color: #E1BEE7; }
     </style>
     """, unsafe_allow_html=True)
 
-# 3. DATABASE
-# Pansinin: Ginamit natin ang "image/" dahil iyon ang pangalan ng folder mo sa explorer
-recipes = {
-    "Ilocos Empanada": {
-        "img": "image/1.png",
-        "emoji": "🥟", "rating": "4.8",
-        "link": "https://www.panlasangpinoy.com",
-        "ing": ["Rice flour", "Longganisa", "Egg", "Papaya"],
-        "inst": "Flatten dough, add fillings, and deep fry until crispy."
-    },
-    "Dubai Chewy Cookie": {
-        "img": "image/2.png",
-        "emoji": "🍪", "rating": "4.9",
-        "link": "https://www.tiktok.com",
-        "ing": ["Butter", "Flour", "Pistachio cream", "Kunafa"],
-        "inst": "Mix ingredients, stuff with kunafa, and bake at 180°C."
-    },
-    "Tofu Squares": {
-        "img": "image/3.png",
-        "emoji": "🍲", "rating": "4.2",
-        "link": "https://www.yummy.ph",
-        "ing": ["Firm Tofu", "Cornstarch", "Soy Sauce", "Honey"],
-        "inst": "Cube tofu, coat in starch, and air fry until golden."
-    },
-    "Samyang Omelette": {
-        "img": "image/4.png",
-        "emoji": "🍳", "rating": "4.7",
-        "link": "https://www.google.com",
-        "ing": ["Samyang Noodles", "Eggs", "Cheese"],
-        "inst": "Boil noodles, mix sauce, and fold into an omelette."
-    },
-    "Cheesy Corn": {
-        "img": "image/5.png",
-        "emoji": "🌽", "rating": "4.6",
-        "link": "https://www.allrecipes.com",
-        "ing": ["Sweet Corn", "Mozzarella", "Mayo", "Butter"],
-        "inst": "Sauté corn in butter, add mayo and cheese, then melt."
-    },
-    "Spud": {
-        "img": "image/6.png",
-        "emoji": "🥔", "rating": "4.4",
-        "link": "https://www.foodnetwork.com",
-        "ing": ["Potato", "Cheese", "Bacon", "Sour Cream"],
-        "inst": "Bake potato, mash the inside, and add toppings."
-    },
-    "Tiramisu": {
-        "img": "image/7.png",
-        "emoji": "🍰", "rating": "5.0",
-        "link": "https://www.delish.com",
-        "ing": ["Ladyfingers", "Espresso", "Mascarpone"],
-        "inst": "Layer coffee-dipped biscuits with mascarpone cream."
-    }
-}
-
-# 4. SESSION STATE
-if 'selected' not in st.session_state:
-    st.session_state.selected = None
-
-# 5. UI LOGIC
+# 3. SIDEBAR NAVIGATION
 st.sidebar.title("💜 Recipe Vault")
-nav = st.sidebar.radio("Navigation", ["Home", "About"])
+nav = st.sidebar.radio("Navigation", ["Home Page", "About App"])
 
-if nav == "Home":
-    if st.session_state.selected is None:
-        st.title("🍔 Trending TikTok Recipes")
-        cols = st.columns(3)
-        for i, (name, info) in enumerate(recipes.items()):
-            with cols[i % 3]:
-                # DITO GINAMIT ANG ST.IMAGE SA PAG-INSERT NG PIC
-                st.image(info['img'], caption=name, use_container_width=True)
-                if st.button(f"View {name}", key=name):
-                    st.session_state.selected = name
-                    st.rerun()
-    else:
-        # DETAIL VIEW
-        item = recipes[st.session_state.selected]
-        if st.button("⬅️ Back"):
-            st.session_state.selected = None
-            st.rerun()
-        st.header(f"{st.session_state.selected} {item['emoji']}")
-        # GINAMIT RIN DITO ANG ST.IMAGE
-        st.image(item['img'], use_container_width=True)
-        st.write("### Ingredients")
-        for ing in item['ing']: st.write(f"- {ing}")
-        st.write("### Instructions", item['inst'])
+# 4. HOME PAGE (MANO-MANO DISPLAY)
+if nav == "Home Page":
+    st.title("🍔 Trending TikTok Recipes")
+    
+    # Layout gamit ang columns para maganda tignan
+    col1, col2, col3 = st.columns(3)
 
-elif nav == "About":
-    st.title("ℹ️ About")
-    st.write("Digital Recipe Book.")
+    # Dito natin ilalagay nang manual ang bawat picture
+    with col1:
+        st.image("image/1.png", caption="Ilocos Empanada", use_container_width=True)
+        if st.button("View Empanada"): st.session_state.page = "Empanada"
+        st.write("Rating: 4.8 ⭐")
+        
+        st.image("image/4.png", caption="Samyang Omelette", use_container_width=True)
+        if st.button("View Omelette"): st.session_state.page = "Omelette"
+        st.write("Rating: 4.7 ⭐")
+
+    with col2:
+        st.image("image/2.png", caption="Dubai Chewy Cookie", use_container_width=True)
+        if st.button("View Cookie"): st.session_state.page = "Cookie"
+        st.write("Rating: 4.9 ⭐")
+        
+        st.image("image/5.png", caption="Cheesy Corn", use_container_width=True)
+        if st.button("View Corn"): st.session_state.page = "Corn"
+        st.write("Rating: 4.6 ⭐")
+
+    with col3:
+        st.image("image/3.png", caption="Tofu Squares", use_container_width=True)
+        if st.button("View Tofu"): st.session_state.page = "Tofu"
+        st.write("Rating: 4.2 ⭐")
+        
+        st.image("image/6.png", caption="Spud", use_container_width=True)
+        if st.button("View Spud"): st.session_state.page = "Spud"
+        st.write("Rating: 4.4 ⭐")
+
+    # Pang-pito na recipe
+    st.image("image/7.png", caption="Tiramisu", use_container_width=True)
+    if st.button("View Tiramisu"): st.session_state.page = "Tiramisu"
+    st.write("Rating: 5.0 ⭐")
+
+# 5. ABOUT PAGE
+elif nav == "About App":
+    st.title("ℹ️ About App")
+    st.write("Isang digital recipe book para sa mga trending TikTok recipes.")
