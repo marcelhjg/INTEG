@@ -2,166 +2,152 @@ import streamlit as st
 import os
 
 # ==========================================
-# 1. PAGE CONFIG & THEME (Light Purple)
+# 1. PAGE CONFIG & LIGHT PURPLE THEME
 # ==========================================
-st.set_page_config(page_title="TikTok Recipe Lab", layout="wide")
+st.set_page_config(page_title="TikTok Recipe Vault", layout="wide")
 
-# Custom CSS para sa Light Purple Theme
 st.markdown("""
     <style>
     .stApp { background-color: #F3E5F5; }
-    .stButton>button { 
-        background-color: #CE93D8; 
-        color: white; 
-        border-radius: 12px; 
-    }
+    .stButton>button { background-color: #CE93D8; color: white; border-radius: 10px; border: none; }
+    .stDownloadButton>button { background-color: #AB47BC; color: white; border-radius: 10px; width: 100%; }
     .stSidebar { background-color: #E1BEE7; }
-    h1, h2, h3 { color: #6A1B9A; }
+    h1, h2, h3, h4 { color: #6A1B9A; }
     </style>
     """, unsafe_allow_html=True)
 
-# ==========================================
-# 2. DYNAMIC PATH SETTING (Para sa WSL/Ubuntu)
-# ==========================================
-# Ito ang kukuha ng folder kung nasaan ang appy.py mo ngayon
+# Path setup para sa WSL/Ubuntu
 current_dir = os.path.dirname(os.path.abspath(__file__))
-image_folder = os.path.join(current_dir, "integ images")
-
-# function para makuha ang tamang path ng bawat pic
-def get_img(filename):
-    return os.path.join(image_folder, filename)
+# Siguraduhin na ang folder name mo ay "integ images" sa explorer
+img_dir = os.path.join(current_dir, "integ images")
 
 # ==========================================
-# 3. DATABASE (7 Recipes Only)
+# 2. DATABASE NG MGA PAGKAIN
 # ==========================================
 recipes = {
     "Ilocos Empanada": {
-        "emoji": "🥟", "img": get_img("1.png"), "rating": "4.8",
+        "img": "1.png", "rating": "4.8", "emoji": "🥟",
         "link": "https://www.panlasangpinoy.com",
-        "ing": ["2 cups rice flour", "1/2 cup water", "Grated green papaya", "Longganisa", "1 egg"],
-        "inst": ["Mix flour & water.", "Flatten on plastic.", "Add filling.", "Deep fry until crispy."]
+        "ing": ["Rice flour", "Longganisa", "Egg", "Papaya"],
+        "inst": "Flatten dough, add fillings, and deep fry until crispy."
     },
     "Dubai Chewy Cookie": {
-        "emoji": "🍪", "img": get_img("2.png"), "rating": "4.9",
+        "img": "2.png", "rating": "4.9", "emoji": "🍪",
         "link": "https://www.tiktok.com",
-        "ing": ["1 cup butter", "1 cup sugar", "2 cups flour", "Pistachio cream", "Kunafa pastry"],
-        "inst": ["Cream butter.", "Fold in flour.", "Stuff with pistachio.", "Bake at 180°C."]
+        "ing": ["Butter", "Flour", "Pistachio cream", "Kunafa"],
+        "inst": "Mix ingredients, stuff with kunafa, and bake at 180°C."
     },
     "Tofu Squares": {
-        "emoji": "🍲", "img": get_img("3.png"), "rating": "4.2",
+        "img": "3.png", "rating": "4.2", "emoji": "🍲",
         "link": "https://www.yummy.ph",
-        "ing": ["Firm tofu", "Cornstarch", "Soy sauce", "Honey"],
-        "inst": ["Cube tofu.", "Coat in starch.", "Air fry.", "Toss in sauce."]
+        "ing": ["Firm Tofu", "Cornstarch", "Soy Sauce", "Honey"],
+        "inst": ["Cube tofu.", "Coat in starch.", "Air fry until golden."]
     },
     "Samyang Omelette": {
-        "emoji": "🍳", "img": get_img("4.png"), "rating": "4.7",
+        "img": "4.png", "rating": "4.7", "emoji": "🍳",
         "link": "https://www.google.com",
-        "ing": ["Samyang noodles", "2 Eggs", "Cheese slice"],
-        "inst": ["Boil noodles.", "Mix with sauce.", "Fold into omelette."]
+        "ing": ["Samyang Noodles", "Eggs", "Cheese"],
+        "inst": "Boil noodles, mix sauce, and fold into an omelette."
     },
     "Cheesy Corn": {
-        "emoji": "🌽", "img": get_img("5.png"), "rating": "4.6",
+        "img": "5.png", "rating": "4.6", "emoji": "🌽",
         "link": "https://www.allrecipes.com",
-        "ing": ["Sweet corn", "Mayonnaise", "Mozzarella", "Butter"],
-        "inst": ["Sauté corn.", "Mix mayo/cheese.", "Melt until gooey."]
+        "ing": ["Sweet Corn", "Mozzarella", "Mayo", "Butter"],
+        "inst": "Sauté corn in butter, add mayo and cheese, then melt."
     },
     "Spud": {
-        "emoji": "🥔", "img": get_img("6.png"), "rating": "4.4",
+        "img": "6.png", "rating": "4.4", "emoji": "🥔",
         "link": "https://www.foodnetwork.com",
-        "ing": ["Large potato", "Butter", "Cheese", "Bacon"],
-        "inst": ["Bake potato.", "Mash inside.", "Add toppings."]
+        "ing": ["Potato", "Cheese", "Bacon", "Sour Cream"],
+        "inst": "Bake potato, mash the inside, and add toppings."
     },
     "Tiramisu": {
-        "emoji": "🍰", "img": get_img("7.png"), "rating": "5.0",
+        "img": "7.png", "rating": "5.0", "emoji": "🍰",
         "link": "https://www.delish.com",
         "ing": ["Ladyfingers", "Espresso", "Mascarpone"],
-        "inst": ["Dip biscuits.", "Layer with cheese.", "Chill 4 hours."]
+        "inst": "Layer coffee-dipped biscuits with mascarpone cream."
     }
 }
 
-# Session State
+# State Management
+if 'page_view' not in st.session_state:
+    st.session_state.page_view = "Home"
 if 'selected_food' not in st.session_state:
     st.session_state.selected_food = None
-if 'favorites' not in st.session_state:
-    st.session_state.favorites = []
 
 # ==========================================
-# 4. SIDEBAR & ABOUT
+# 3. SIDEBAR NAVIGATION
 # ==========================================
-st.sidebar.title("💜 TikTok Food Vault")
+st.sidebar.title("💜 Recipe Vault")
 nav = st.sidebar.radio("Navigation", ["Home Page", "About App"])
 
-if st.session_state.favorites:
-    st.sidebar.divider()
-    st.sidebar.subheader("⭐ My Favorites")
-    for fav in st.session_state.favorites:
-        st.sidebar.write(f"• {fav}")
-
 if nav == "About App":
-    st.title("ℹ️ Project Information")
-    st.markdown("""
-    - **What it does:** Digital recipe book for TikTok trends.
-    - **Target User:** Home cooks and students.
-    - **Inputs:** Buttons, sliders, file uploaders.
-    - **Outputs:** Recipes, images, and links.
-    """)
-    if st.button("Back to Home"):
-        st.session_state.selected_food = None
+    st.title("ℹ️ About This App")
+    st.write("**Use-Case:** Digital Recipe Book for Viral TikTok Foods.")
+    st.write("**Target User:** Home cooks and students.")
+    st.write("**Inputs:** Selection buttons, ratings, and feedback.")
+    if st.sidebar.button("Back to Home"):
+        st.session_state.page_view = "Home"
         st.rerun()
 
-# ============= HOME PAGE =============
-else:
+# ==========================================
+# 4. MAIN INTERFACE
+# ==========================================
+if nav == "Home Page":
     if st.session_state.selected_food is None:
-        st.title("🍔 Trending TikTok Recipes 2026")
+        st.title("🍔 TikTok Trending Recipes")
         
+        # Grid View (3 Columns)
         cols = st.columns(3)
-        food_items = list(recipes.keys())
-
-        for idx, food in enumerate(food_items):
+        for idx, (name, info) in enumerate(recipes.items()):
             with cols[idx % 3]:
-                # Display Image
-                if os.path.exists(recipes[food]['img']):
-                    st.image(recipes[food]['img'], use_container_width=True)
+                img_path = os.path.join(img_dir, info['img'])
+                if os.path.exists(img_path):
+                    st.image(img_path, use_container_width=True)
                 else:
-                    st.error(f"Pic not found at: {recipes[food]['img']}")
+                    st.error(f"Image {info['img']} not found")
                 
-                if st.button(f"View {food}", key=f"btn_{food}", use_container_width=True):
-                    st.session_state.selected_food = food
+                if st.button(f"View {name}", key=name, use_container_width=True):
+                    st.session_state.selected_food = name
                     st.rerun()
-                st.write(f"Rating: {recipes[food]['rating']} ⭐")
+                st.write(f"Rating: {info['rating']} ⭐")
                 st.divider()
 
-    # ============= RECIPE DETAIL =============
     else:
+        # RECIPE DETAIL VIEW (Katulad ng format sa screenshot 2)
         food = st.session_state.selected_food
-        data = recipes[food]
-
-        if st.button("⬅️ Back to Gallery"):
+        item = recipes[food]
+        
+        if st.button("⬅️ Back to Menu"):
             st.session_state.selected_food = None
             st.rerun()
-
-        col1, col2 = st.columns([1, 1.2])
-        with col1:
-            st.image(data['img'], use_container_width=True)
-            if food not in st.session_state.favorites:
-                if st.button("⭐ Add to Favorites"):
-                    st.session_state.favorites.append(food)
-                    st.rerun()
-            else:
-                if st.button("💔 Remove Favorite"):
-                    st.session_state.favorites.remove(food)
-                    st.rerun()
-
-        with col2:
-            st.header(f"{food} {data['emoji']}")
-            st.link_button("🔗 Recipe Source", data['link'])
-            st.subheader("🛒 Ingredients")
-            for item in data['ing']:
-                st.write(f"• {item}")
-            st.subheader("📝 Instructions")
-            for i, step in enumerate(data['inst'], 1):
-                st.write(f"{i}. {step}")
-        
+            
+        st.header(f"{food} {item['emoji']}")
         st.divider()
-        st.progress(100, text="Recipe Loaded!")
-        st.balloons() if st.button("Cooked this!") else None
+        
+        # Layout with Image and Details
+        col_img, col_details = st.columns([1, 2])
+        
+        with col_img:
+            img_path = os.path.join(img_dir, item['img'])
+            st.image(img_path, caption=f"Finished {food}", use_container_width=True)
+            if st.button("⭐ Save to Favorites"):
+                st.toast(f"{food} added to favorites!")
+        
+        with col_details:
+            st.subheader("🛒 Ingredients")
+            for ing in item['ing']:
+                st.write(f"• {ing}")
+                
+            st.subheader("📝 Instructions")
+            st.write(item['inst'])
+            
+            st.divider()
+            # Link to Original Recipe
+            st.link_button(f"🔗 View Original {food} Recipe", item['link'])
+            
+            # Additional UI Components (Merit Points)
+            st.slider("How hard is this to cook?", 1, 5, 3)
+            st.checkbox("I have all ingredients")
+            if st.button("🚀 Share Success"):
+                st.balloons()
