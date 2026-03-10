@@ -16,16 +16,56 @@ h1, h2, h3 { color: #6a0dad; }
 
 # Recipe Database
 recipes = {
-    "Ilocos Empanada": {"emoji": "🥟", "img": "image/1.png", "rating": 5, "diff": "Hard", "ing": ["rice flour", "water", "green papaya", "longganisa", "egg"], "inst": ["Start by mixing the rice flour with water.", "Flatten the dough thinly on plastic.", "Add papaya, longganisa, and egg filling.", "Seal edges and deep fry until crispy."]},
-    "Dubai Chewy Cookie": {"emoji": "🍪", "img": "image/2.png", "rating": 5, "diff": "Medium", "ing": ["butter", "sugar", "flour", "pistachio cream", "kunafa pastry"], "inst": ["Cream butter and sugar.", "Fold in flour.", "Stuff with pistachio cream and kunafa.", "Bake at 180°C until chewy."]},
-    "Tofu Squares": {"emoji": "🍲", "img": "image/3.png", "rating": 4, "diff": "Easy", "ing": ["firm tofu", "cornstarch", "soy sauce", "honey"], "inst": ["Cube tofu.", "Coat in cornstarch.", "Air fry until crispy.", "Toss in soy sauce and honey."]},
-    "Samyang Omelette": {"emoji": "🍳", "img": "image/4.png", "rating": 4, "diff": "Easy", "ing": ["Samyang noodles", "2 eggs", "cheese slice"], "inst": ["Cook noodles.", "Mix spicy sauce.", "Fold noodles inside omelette and add cheese."]},
-    "Cheesy Corn": {"emoji": "🌽", "img": "image/5.png", "rating": 4, "diff": "Easy", "ing": ["sweet corn", "mayonnaise", "mozzarella", "butter"], "inst": ["Sauté corn in butter.", "Add mayonnaise.", "Top with mozzarella and melt."]},
-    "Spud": {"emoji": "🥔", "img": "image/6.png", "rating": 4, "diff": "Medium", "ing": ["large potato", "butter", "cheese", "bacon"], "inst": ["Bake potato.", "Mash with butter.", "Top with bacon and cheese."]},
-    "Tiramisu": {"emoji": "🍰", "img": "image/7.png", "rating": 5, "diff": "Medium", "ing": ["ladyfingers", "espresso", "mascarpone"], "inst": ["Dip ladyfingers in espresso.", "Layer with mascarpone cream.", "Chill for 4 hours."]},
-    "Grilled Scallops": {"emoji": "🐚", "img": "image/8.png", "rating": 5, "diff": "Medium", "ing": ["scallops", "butter", "garlic", "lemon"], "inst": ["Clean scallops.", "Sauté garlic in butter.", "Grill scallops until opaque.", "Add lemon juice."]},
-    "Chocolate Xiao Long Bao": {"emoji": "🥟", "img": "image/9.png", "rating": 5, "diff": "Hard", "ing": ["dumpling wrapper", "dark chocolate", "heavy cream"], "inst": ["Make chocolate ganache.", "Chill mixture.", "Wrap inside dumpling wrapper.", "Steam for 5 minutes."]},
-    "Buko Sherbet": {"emoji": "🥥", "img": "image/10.png", "rating": 5, "diff": "Easy", "ing": ["young coconut meat", "coconut water", "condensed milk", "crushed ice"], "inst": ["Blend coconut meat and water until smooth.", "Stir in condensed milk.", "Freeze for an hour.", "Serve over crushed ice."]}
+    "Ilocos Empanada": {
+        "emoji": "🥟", "img": "image/1.png", "rating": 5, "diff": "Hard", 
+        "ing": ["rice flour", "atsuete water", "grated green papaya", "skinless longganisa", "fresh egg"], 
+        "inst": ["Begin by kneading the rice flour mixed with atsuete water to achieve that vibrant orange dough. Flatten small portions thinly on a plastic sheet, then generously layer the grated green papaya, savory longganisa, and a fresh egg in the center. Carefully fold the dough over to seal the edges, ensuring the filling is snug. Deep-fry in hot oil until the crust turns perfectly golden and crunchy."]
+    },
+    "Buko Sherbet": {
+        "emoji": "🥥", "img": "image/6.png", "rating": 5, "diff": "Easy", 
+        "ing": ["young coconut meat", "fresh coconut water", "condensed milk", "crushed ice"], 
+        "inst": ["Scoop out the soft meat from the young coconut and blend it with fresh coconut water until you reach a silky consistency. Gently stir in the condensed milk to balance the sweetness of the coconut. Pour this mixture into a container and freeze for at least an hour to let it firm up. Finally, serve it over a heap of crushed ice for that ultimate tropical refreshment."]
+    },
+    "Tofu Sisig": {
+        "emoji": "🍲", "img": "image/3.png", "rating": 4, "diff": "Medium", 
+        "ing": ["firm tofu", "calamansi", "soy sauce", "red onions", "chili peppers"], 
+        "inst": ["Start by frying the cubed tofu until it becomes crispy and golden brown on all sides. In a separate bowl, toss the fried tofu with freshly squeezed calamansi, savory soy sauce, chopped red onions, and a kick of spicy chili peppers. Serve it hot on a sizzling plate to capture that authentic street-food aroma."]
+    },
+    "Adobo Flakes": {
+        "emoji": "🍗", "img": "image/4.png", "rating": 5, "diff": "Medium", 
+        "ing": ["cooked chicken adobo", "garlic", "vegetable oil"], 
+        "inst": ["Take your leftover chicken adobo and carefully shred the meat into thin, bite-sized strips. Heat a generous amount of oil in a pan and fry the shredded chicken along with plenty of minced garlic until the edges turn dark and extra crispy. This crunchy, savory treat is best paired with a mound of steaming garlic rice."]
+    },
+    "Pinoy-Style Spaghetti": {
+        "emoji": "🍝", "img": "image/5.png", "rating": 5, "diff": "Easy", 
+        "ing": ["spaghetti noodles", "sweet-style tomato sauce", "hotdogs", "ground pork", "cheddar cheese"], 
+        "inst": ["Boil your spaghetti noodles until al dente. In a pan, sauté the ground pork and sliced hotdogs, then pour in the signature sweet-style tomato sauce, letting it simmer until the flavors meld. Toss the cooked noodles into the sauce until every strand is coated, and top it off with a generous amount of grated cheddar cheese."]
+    },
+    "Mango Graham Float": {
+        "emoji": "🥭", "img": "image/10.png", "rating": 5, "diff": "Easy", 
+        "ing": ["ripe mangoes", "graham crackers", "all-purpose cream", "condensed milk"], 
+        "inst": ["Whisk together the all-purpose cream and condensed milk until the mixture is thick and smooth. Create a foundation by laying graham crackers at the bottom of a container, followed by a layer of the cream mixture and a generous amount of sliced ripe mangoes. Repeat these layers until the container is full, then chill until the float is perfectly set and creamy."]
+    },
+    "Tiramisu": {
+        "emoji": "🍰", "img": "image/7.png", "rating": 5, "diff": "Medium", 
+        "ing": ["ladyfingers", "strong espresso", "mascarpone cheese"], 
+        "inst": ["Quickly dip each ladyfinger into the strong espresso, making sure not to soak them too long. Create alternating layers of the coffee-soaked biscuits and a rich, whipped mascarpone cream mixture. Allow the dessert to rest in the refrigerator for at least four hours, letting the coffee and cream fuse into a heavenly, melt-in-your-mouth experience."]
+    },
+    "Grilled Scallops": {
+        "emoji": "🐚", "img": "image/8.png", "rating": 5, "diff": "Medium", 
+        "ing": ["fresh scallops", "salted butter", "minced garlic", "lemon wedges"], 
+        "inst": ["Thoroughly clean the scallops and pat them dry. Sauté a generous amount of minced garlic in melted butter, then pour this mixture over the scallops before placing them on a hot grill. Cook them briefly until they turn opaque, and serve with a fresh squeeze of lemon to highlight the natural sweetness of the seafood."]
+    },
+    "Chocolate Xiao Long Bao": {
+        "emoji": "🥟", "img": "image/9.png", "rating": 5, "diff": "Hard", 
+        "ing": ["dumpling wrappers", "dark chocolate", "heavy cream"], 
+        "inst": ["Create a rich ganache by melting dark chocolate with warm heavy cream, then set it in the fridge until it becomes firm. Carefully place a small spoonful of the ganache in the center of a dumpling wrapper, pleating the edges tightly to seal the chocolate inside. Steam these delicate parcels for just five minutes until the wrapper is soft and the center is molten."]
+    },
+    "Dubai Chewy Cookie": {
+        "emoji": "🍪", "img": "image/2.png", "rating": 5, "diff": "Medium", 
+        "ing": ["butter", "sugar", "all-purpose flour", "pistachio cream", "kunafa pastry"], 
+        "inst": ["Cream the butter and sugar until the texture is light and fluffy. Slowly fold in the flour to create a soft, manageable dough. Stuff the center of each ball with a rich mixture of pistachio cream and crunchy kunafa pastry, then bake at 180°C until the edges are golden and the center remains delightfully chewy."]
+    }
 }
 
 favorites = ["Ilocos Empanada", "Tofu Squares", "Buko Sherbet"]
@@ -43,11 +83,13 @@ with st.sidebar:
 
 # Logic
 if page == "About":
+   if page == "About":
     st.title("ℹ️ Project Information")
-    st.write("- **What it does:** Digital recipe book for viral TikTok trends.")
-    st.write("- **Target User:** Aspiring home cooks and food lovers.")
-    st.write("- **Inputs:** Ratings, reviews, sliders, and file uploads.")
-    st.write("- **Outputs:** Recipe cards, interactive timers, and animations.")
+    st.info("Created for Streamlit UI Assignment")
+    st.write("- **What it does:** This app works as a digital recipe book that collects popular and trending foods seen on TikTok. Users can browse different viral dishes, view their ingredients, and follow step-by-step cooking instructions to recreate them at home.")
+    st.write("- **Target User:** The app is designed for aspiring home cooks, students, food enthusiasts, and anyone who enjoys trying viral food trends from social media.")
+    st.write("- **Inputs:** The app collects user interactions such as star ratings for recipes, text inputs for personal cooking notes, sliders for preferences, and optional file uploads where users can share photos of the dishes they cooked.")
+    st.write("- **Outputs:** The app displays detailed recipe cards that include images, ingredients, and instructions. It also shows feedback such as recipe ratings, progress indicators, and visual confirmations to enhance the user experience.")
 else:
     if st.session_state.selected_food is None:
         st.title("🍔 Snackverse 2026")
