@@ -2,191 +2,146 @@ import streamlit as st
 import time
 
 # ==========================================
-# 1. RECIPE DATABASE
+# 1. DATABASE NG MGA PAGKAIN
 # ==========================================
-# Ginamit natin ito para madaling i-manage ang data
 recipes = {
     "Ilocos Empanada": {
-        "emoji": "🥟", "img": "ilocos_empanada.jpg", "rating": 4.8, "level": "Medium",
-        "ing": ["2 cups rice flour", "1/2 cup water", "Green papaya", "Longganisa", "1 egg"],
-        "inst": ["Mix rice flour and water.", "Flatten batter on plastic.", "Add filling.", "Deep fry until orange."]
+        "emoji": "🥟", "img": "ilocos_empanada.jpg", "rating": "4.8",
+        "ing": ["2 cups rice flour", "1/2 cup water", "Grated green papaya", "Longganisa", "1 egg"],
+        "inst": ["Mix flour & water.", "Flatten on plastic.", "Add filling.", "Deep fry."]
     },
     "Dubai Chewy Cookie": {
-        "emoji": "🍪", "img": "dubai_cookie.jpg", "rating": 4.9, "level": "Hard",
+        "emoji": "🍪", "img": "dubai_cookie.jpg", "rating": "4.9",
         "ing": ["1 cup butter", "1 cup sugar", "2 cups flour", "Pistachio cream", "Kunafa pastry"],
-        "inst": ["Cream butter and sugar.", "Fold in flour.", "Stuff with pistachio and kunafa.", "Bake at 180°C."]
+        "inst": ["Cream butter.", "Fold in flour.", "Stuff with pistachio.", "Bake 180°C."]
     },
     "Bell Pepper Cream Cheese w/ Cheetos": {
-        "emoji": "🌶️", "img": "bell_pepper.jpg", "rating": 4.5, "level": "Easy",
-        "ing": ["Mini bell peppers", "Cream cheese", "Flamin' Hot Cheetos", "Bagel seasoning"],
+        "emoji": "🌶️", "img": "bell_pepper.jpg", "rating": "4.5",
+        "ing": ["Mini bell peppers", "Cream cheese", "Flamin' Hot Cheetos"],
         "inst": ["Slice peppers.", "Fill with cream cheese.", "Top with crushed Cheetos."]
     },
     "Tofu Squares": {
-        "emoji": "🍲", "img": "tofu.jpg", "rating": 4.2, "level": "Easy",
-        "ing": ["Firm tofu", "Cornstarch", "Soy sauce", "Honey", "Garlic"],
-        "inst": ["Cube tofu.", "Coat in starch.", "Air fry until crispy.", "Toss in sauce."]
+        "emoji": "🍲", "img": "tofu.jpg", "rating": "4.2",
+        "ing": ["Firm tofu", "Cornstarch", "Soy sauce", "Honey"],
+        "inst": ["Cube tofu.", "Coat in starch.", "Air fry.", "Toss in sauce."]
     },
     "Samyang Omelette": {
-        "emoji": "🍳", "img": "samyang.jpg", "rating": 4.7, "level": "Easy",
-        "ing": ["Samyang Buldak noodles", "2 Eggs", "Cheese slice", "Seaweed"],
-        "inst": ["Boil noodles.", "Mix with sauce.", "Fold into a beaten egg omelette base."]
+        "emoji": "🍳", "img": "samyang.jpg", "rating": "4.7",
+        "ing": ["Samyang noodles", "2 Eggs", "Cheese slice"],
+        "inst": ["Boil noodles.", "Mix with sauce.", "Fold into omelette."]
     },
     "Cheesy Corn": {
-        "emoji": "🌽", "img": "corn.jpg", "rating": 4.6, "level": "Easy",
+        "emoji": "🌽", "img": "corn.jpg", "rating": "4.6",
         "ing": ["Sweet corn", "Mayonnaise", "Mozzarella", "Butter"],
-        "inst": ["Sauté corn in butter.", "Mix mayo and cheese.", "Torch or bake until melted."]
+        "inst": ["Sauté corn.", "Mix mayo/cheese.", "Melt until gooey."]
     },
     "Spud": {
-        "emoji": "🥔", "img": "spud.jpg", "rating": 4.4, "level": "Medium",
-        "ing": ["Large potato", "Butter", "Cheese", "Sour cream", "Bacon bits"],
-        "inst": ["Bake or boil potato.", "Mash the inside with butter.", "Add toppings."]
+        "emoji": "🥔", "img": "spud.jpg", "rating": "4.4",
+        "ing": ["Large potato", "Butter", "Cheese", "Bacon"],
+        "inst": ["Bake potato.", "Mash inside.", "Add toppings."]
     },
     "Tiramisu": {
-        "emoji": "🍰", "img": "tiramisu.jpg", "rating": 5.0, "level": "Medium",
-        "ing": ["Ladyfingers", "Espresso", "Mascarpone", "Cocoa powder"],
-        "inst": ["Dip biscuits in coffee.", "Layer with mascarpone.", "Dust cocoa.", "Chill for 4 hours."]
+        "emoji": "🍰", "img": "tiramisu.jpg", "rating": "5.0",
+        "ing": ["Ladyfingers", "Espresso", "Mascarpone"],
+        "inst": ["Dip biscuits.", "Layer with cheese.", "Chill 4 hours."]
     },
     "Panipuri": {
-        "emoji": "🥣", "img": "panipuri.jpg", "rating": 4.3, "level": "Medium",
-        "ing": ["Puri shells", "Spiced potatoes", "Tamarind water", "Chutney"],
-        "inst": ["Poke hole in puri.", "Fill with potato mixture.", "Dip in flavored water."]
+        "emoji": "🥣", "img": "panipuri.jpg", "rating": "4.3",
+        "ing": ["Puri shells", "Spiced potatoes", "Tamarind water"],
+        "inst": ["Poke hole.", "Fill with potato.", "Dip in water."]
     }
 }
 
-# ==========================================
-# 2. SIDEBAR NAVIGATION & CONFIG
-# ==========================================
-st.set_page_config(page_title="TikTok Recipe Lab", layout="wide") # Extra: Page Config
-
-st.sidebar.title("👨‍🍳 Viral Recipe Lab")
-# Component 1: st.sidebar.radio
-page = st.sidebar.radio("Main Menu", ["Home / Discover", "About the App"])
-
-# Component 2: st.sidebar.toggle (Extra Merit: Toggle component)
-show_details = st.sidebar.toggle("Show Extra Stats", value=True)
+# Session State para maalala kung anong pagkain ang pinindot
+if 'selected_food' not in st.session_state:
+    st.session_state.selected_food = None
 
 # ==========================================
-# 3. ABOUT PAGE
+# 2. SIDEBAR NAVIGATION
 # ==========================================
-if page == "About the App":
-    # Component 3: st.title
-    st.title("ℹ️ About This Project")
-    
-    # Component 4: st.info
-    st.info("Course Requirement: Streamlit UI Flow Demonstration (No API)")
+st.sidebar.title("📱 TikTok Food Lab")
+page = st.sidebar.radio("Go to", ["Home Page", "About App"])
 
-    # Component 5: st.markdown
+# ==========================================
+# 3. ABOUT PAGE (Requirement)
+# ==========================================
+if page == "About App":
+    st.title("ℹ️ Project Information")
+    st.info("Created for Streamlit UI Assignment")
     st.markdown("""
-    ### 🎯 Use-Case
-    Ang **TikTok Recipe Lab** ay isang interactive digital cookbook. Ginawa ito para matulungan ang mga users na mahanap ang pinakasikat na pagkain sa TikTok (Batch 2026) nang hindi na kailangang mag-scroll nang matagal sa social media.
-
-    ### 👥 Target User
-    - **Home Cooks:** Mga gustong sumubok ng viral food trends.
-    - **Content Creators:** Mga naghahanap ng inspiration para sa kanilang susunod na video.
-    
-    ### 📥 Inputs & 📤 Outputs
-    - **Inputs:** Recipe selection (selectbox), servings (number input), user reviews (text area), rating (slider), profile color (color picker), at file uploads.
-    - **Outputs:** Ingredients list, step-by-step instructions, popularity metrics, at dynamic cooking status.
+    - **What it does:** Isang digital recipe book para sa viral TikTok foods.
+    - **Target User:** Home cooks at foodies.
+    - **Inputs:** Button clicks, ratings, comments, and file uploads.
+    - **Outputs:** Recipe details, images, and cooking status.
     """)
-    
-    # Component 6: st.divider
-    st.divider()
-    # Component 7: st.link_button (Extra Merit: Link Button)
-    st.link_button("View Developer Portfolio", "https://github.com")
+    if st.button("Back to Home"):
+        st.session_state.selected_food = None
+        st.rerun()
 
 # ==========================================
-# 4. HOME PAGE / DISCOVER
+# 4. HOME PAGE (Gallery View)
 # ==========================================
 else:
-    # Component 8: st.header
-    st.header("🍔 Discover TikTok's Best Recipes")
-    
-    # Component 9: st.tabs
-    tab_recipe, tab_community = st.tabs(["📖 Recipe Book", "💬 Community Hub"])
-
-    with tab_recipe:
-        # Component 10: st.selectbox
-        food_choice = st.selectbox("Pumili ng pagkaing lulutuin:", list(recipes.keys()))
-        selected = recipes[food_choice]
-
-        # Component 11: st.columns
-        col1, col2 = st.columns([1, 1])
-
-        with col1:
-            # Component 12: st.image (Placeholder handling)
-            try:
-                st.image(selected['img'], use_container_width=True)
-            except:
-                st.warning(f"Image file '{selected['img']}' not found. Please add it to your folder.")
+    if st.session_state.selected_food is None:
+        st.title("🍔 Trending TikTok Recipes 2026")
+        st.write("Pumili ng pagkain para makita ang recipe:")
         
-        with col2:
-            # Component 13: st.subheader
-            st.subheader(f"{food_choice} {selected['emoji']}")
-            
-            # Component 14: st.metric
-            st.metric("Popularity", f"{selected['rating']} / 5.0", delta="Trending Now")
-            
-            # Component 15: st.select_slider (Extra Merit: Select Slider)
-            servings = st.select_slider("Adjust Servings:", options=[1, 2, 4, 6, 8], value=2)
+        # Gagawa tayo ng Grid (3 columns)
+        cols = st.columns(3)
+        food_list = list(recipes.keys())
 
-            if show_details:
-                # Component 16: st.code (Extra Merit: Code display for difficulty)
-                st.code(f"Difficulty Level: {selected['level']}", language='python')
+        for i, food in enumerate(food_list):
+            with cols[i % 3]:
+                st.write(f"### {recipes[food]['emoji']}")
+                # Button para piliin ang pagkain
+                if st.button(food, key=food, use_container_width=True):
+                    st.session_state.selected_food = food
+                    st.rerun()
+                st.caption(f"Rating: {recipes[food]['rating']} ⭐")
+
+    # ==========================================
+    # 5. RECIPE DETAIL VIEW (Lalabas kapag may pinindot)
+    # ==========================================
+    else:
+        food = st.session_state.selected_food
+        data = recipes[food]
+
+        if st.button("⬅️ Back to Gallery"):
+            st.session_state.selected_food = None
+            st.rerun()
 
         st.divider()
+        col_left, col_right = st.columns([1, 1.2])
 
-        # Component 17: st.columns for lists
-        c1, c2 = st.columns(2)
-        with c1:
-            st.write("### 🛒 Ingredients")
-            for item in selected['ing']:
-                # Component 18: st.write
-                st.write(f"- {item}")
-        
-        with c2:
-            st.write("### 📝 Cooking Steps")
-            for i, step in enumerate(selected['inst'], 1):
+        with col_left:
+            try:
+                st.image(data['img'], caption=f"Viral {food}", use_container_width=True)
+            except:
+                st.warning(f"Paalala: Ilagay ang '{data['img']}' sa folder mo para lumabas ang picture.")
+            
+            st.metric("Popularity", data['rating'])
+
+        with col_right:
+            st.header(f"{food} {data['emoji']}")
+            st.subheader("🛒 Ingredients")
+            for ing in data['ing']:
+                st.write(f"- {ing}")
+            
+            st.subheader("📝 Instructions")
+            for i, step in enumerate(data['inst'], 1):
                 st.write(f"{i}. {step}")
 
-        # Component 19: st.checkbox
-        if st.checkbox("Mark as 'Ready to Cook'"):
-            # Component 20: st.success
-            st.success("Ingredients prepared! Let's start.")
-
-    with tab_community:
-        st.write("### Tell us what you think!")
-        # Component 21: st.slider
-        user_rating = st.slider("Rate this recipe:", 0, 10, 8)
-        # Component 22: st.text_area
-        user_note = st.text_area("Add your personal cooking tips:")
-        # Component 23: st.color_picker
-        st.color_picker("Pick a theme for your review card:")
-        # Component 24: st.file_uploader
-        st.file_uploader("Upload your result photo", type=['png', 'jpg'])
-
-    # ==========================================
-    # 5. ACTION & FEEDBACK (Advanced UI)
-    # ==========================================
-    st.divider()
-    # Component 25: st.button
-    if st.button("🚀 Post to TikTok Community"):
-        # Component 26: st.status (Extra Merit: Status updates)
-        with st.status("Processing your review...", expanded=True) as status:
-            time.sleep(1)
-            st.write("Scanning for quality...")
-            time.sleep(1)
-            st.write("Syncing with Community Feed...")
-            status.update(label="Review Posted!", state="complete", expanded=False)
-        
-        # Component 27: st.balloons
-        st.balloons()
-        # Component 28: st.toast (Extra Merit: Toast notification)
-        st.toast(f"Successfully shared {food_choice} review!", icon='✅')
-
-    # Component 29: st.expander
-    with st.expander("❓ Common FAQs"):
-        st.write("Can I use an air fryer? - Yes, for most fried recipes here!")
-
-    # Component 30: st.progress
-    st.write("Your Cooking Profile Level")
-    st.progress(65)
+        # Extra Interactivity (Requirement: 20+ components)
+        st.divider()
+        tab1, tab2 = st.tabs(["Rate & Review", "Cook Mode"])
+        with tab1:
+            st.slider("Rate this:", 1, 10, 8)
+            st.text_area("Anong masasabi mo?")
+            st.file_uploader("Upload your version", type=['jpg', 'png'])
+            if st.button("Submit Review"):
+                st.balloons()
+                st.toast("Review Posted!", icon="✅")
+        with tab2:
+            st.progress(40, text="Cooking Progress...")
+            st.color_picker("Pick a plate color:")
+            st.status("Kitchen is heating up...")
